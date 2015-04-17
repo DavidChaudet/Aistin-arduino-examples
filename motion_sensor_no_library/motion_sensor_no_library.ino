@@ -35,7 +35,7 @@ void writeAccRegs(unsigned char reg, unsigned char value)
   Wire.endTransmission();
 }
 
-void readAcc(int &x, int &y, int &z, int &total)
+void readAcc(int &x, int &y, int &z, int &resultant)
 {
   float xAxis; //float so calculation won't fail later
   float yAxis;
@@ -59,7 +59,7 @@ void readAcc(int &x, int &y, int &z, int &total)
    x = xAxis*1000/(1024*16); //transform data to millig, for SCALE_2G xAxis*1000/(1024*16),
    y = yAxis*1000/(1024*16); //for SCALE_4G xAxis*1000/(1024*8),
    z = zAxis*1000/(1024*16); //for SCALE_8G xAxis*1000/(1024*4)
-   total = sqrt(xAxis*xAxis+yAxis*yAxis+zAxis*zAxis)*1000/(1024*16); //total acceleration in millig
+   resultant = sqrt(xAxis*xAxis+yAxis*yAxis+zAxis*zAxis)*1000/(1024*16); //resultant acceleration in millig
 }
 
 void setup()
@@ -75,17 +75,17 @@ void loop()
     int x;
     int y;
     int z;
-    int total;
-    readAcc(x, y, z, total); //read axes data and return it to x, y, z, total variables respectively
+    int resultant;
+    readAcc(x, y, z, resultant); //read axes data and return it to x, y, z, resultant variables respectively
     delay(100); //delay to slow down process
-    Serial.print("x:    \t");
-    Serial.print(x);
-    Serial.print(" mg    \t y:    \t");
-    Serial.print(y);
-    Serial.print(" mg    \t z:    \t");
-    Serial.print(z);
-    Serial.print(" mg    \t total:\t");
-    Serial.print(total);
-    Serial.println(" mg");
+  Serial.print("x: "); //print everything
+  Serial.print(x);
+  Serial.print(" mg \ty: ");
+  Serial.print(y);
+  Serial.print(" mg \tz: ");
+  Serial.print(z);
+  Serial.print(" mg \ttotal: ");
+  Serial.print(resultant);
+  Serial.println(" mg");
 }
 

@@ -52,9 +52,9 @@ enum ODR_t {
 	ODR_5HZ 	= 0xA0,
 	ODR_10HZ 	= 0xC0 };
 enum scale_t {
-	scale_2g	= 0x80,
-	scale_4g	= 0x90,
-	scale_8g	= 0xB0 };
+	SCALE_2g	= 0x80,
+	SCALE_4g	= 0x90,
+	SCALE_8g	= 0xB0 };
 	
 	
 class LSM303 {
@@ -66,7 +66,7 @@ public:
 	uint16_t getResultant(int16_t, int16_t, int16_t vector3 = 0); //calculate resultant vector
 	void writeReg(uint8_t, uint8_t); //writes the value into accelerometers register
 	uint8_t readReg(uint8_t); //reads the value from accelerometers register
-	void writeAccDefaults(void); //default basic config for Accelerometer (ODR 400Hz, all axes enabled, output registers not updated between MSB and LSB reading)
+	void init(void); //default basic config for Accelerometer (ODR 400Hz, all axes enabled, output registers not updated between MSB and LSB reading)
 	bool setScale(scale_t); //set accelerometer maximum scale
 	int8_t getScale(void); //get accelerometer current scale setting
 	};

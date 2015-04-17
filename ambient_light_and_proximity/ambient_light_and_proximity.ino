@@ -19,7 +19,7 @@ void setup()
   ALPsensor.reset(); //reset Ambient Light & Proximity sensor
   ALPsensor.ambientMode(ON_ALP); //turn on Ambient Light measurement
   ALPsensor.proximityMode(ON_ALP); //turn on Proximity measurement
-  ALPsensor.ledCurrent(current_50mA); //set IR-led current to 50mA
+  ALPsensor.irCurrent(IR_CURRENT_50mA); //set IR-led current to 50mA
   delay(200);
 }
 void loop()
@@ -99,25 +99,25 @@ void serialControl(uint8_t serialData)
     switch(current)
     {
       case 5:
-        ALPsensor.ledCurrent(current_5mA);
+        ALPsensor.irCurrent(IR_CURRENT_5mA);
         break;
       case 10:
-        ALPsensor.ledCurrent(current_10mA);
+        ALPsensor.irCurrent(IR_CURRENT_10mA);
         break;
       case 20:
-        ALPsensor.ledCurrent(current_20mA);
+        ALPsensor.irCurrent(IR_CURRENT_20mA);
         break;
       case 50:
-        ALPsensor.ledCurrent(current_50mA);
+        ALPsensor.irCurrent(IR_CURRENT_50mA);
         break;
       case 100:
-        ALPsensor.ledCurrent(current_100mA);
+        ALPsensor.irCurrent(IR_CURRENT_100mA);
         break;
       case 150:
-        ALPsensor.ledCurrent(current_150mA);
+        ALPsensor.irCurrent(IR_CURRENT_150mA);
         break;
       case 200:
-        ALPsensor.ledCurrent(current_200mA);
+        ALPsensor.irCurrent(IR_CURRENT_200mA);
         break;
       default:
         Serial.println("i<current> to change currents: 5, 10, 20, 50, 100, 150 or 200mA");
@@ -126,11 +126,9 @@ void serialControl(uint8_t serialData)
   }
   else if(serialData == 's')
   {
-    if(Serial.available())
-    {
-      uint8_t sensitivity = Serial.parseInt();
+    uint8_t sensitivity = Serial.parseInt();
+    if(sensitivity>23 && sensitivity<255)
       ALPsensor.ambientSensitivity(sensitivity);
-    }
     else
       Serial.println("s<sensitivity> to change ambient sensitivity: 24-254");
   }
@@ -143,22 +141,22 @@ void serialControl(uint8_t serialData)
       switch(measRate)
       {
         case 0:
-          ALPsensor.ambientMeasRate(max_meas_rate);
+          ALPsensor.ambientMeasRate(MAX_MEAS_RATE);
           break;
         case 100:
-          ALPsensor.ambientMeasRate(meas_time_100ms);
+          ALPsensor.ambientMeasRate(MEAS_RATE_100ms);
           break;
         case 200:
-          ALPsensor.ambientMeasRate(meas_time_200ms);
+          ALPsensor.ambientMeasRate(MEAS_RATE_200ms);
           break;
         case 500:
-          ALPsensor.ambientMeasRate(meas_time_500ms);
+          ALPsensor.ambientMeasRate(MEAS_RATE_500ms);
           break;
         case 1000:
-          ALPsensor.ambientMeasRate(meas_time_1000ms);
+          ALPsensor.ambientMeasRate(MEAS_RATE_1000ms);
           break;
         case 2000:
-          ALPsensor.ambientMeasRate(meas_time_2000ms);
+          ALPsensor.ambientMeasRate(MEAS_RATE_2000ms);
           break;
         default:
           Serial.println("Ambient meas rates: 100ms, 200ms, 500ms, 1000ms, 2000ms or 0 for max");
@@ -172,37 +170,37 @@ void serialControl(uint8_t serialData)
       switch(measRate)
       {
         case 0:
-          ALPsensor.proximityMeasRate(max_meas_rate);
+          ALPsensor.proximityMeasRate(MAX_MEAS_RATE);
           break;
         case 10:
-          ALPsensor.proximityMeasRate(meas_time_10ms);
+          ALPsensor.proximityMeasRate(MEAS_RATE_10ms);
           break;
         case 20:
-          ALPsensor.proximityMeasRate(meas_time_20ms);
+          ALPsensor.proximityMeasRate(MEAS_RATE_20ms);
           break;
         case 30:
-          ALPsensor.proximityMeasRate(meas_time_30ms);
+          ALPsensor.proximityMeasRate(MEAS_RATE_30ms);
           break;
         case 50:
-          ALPsensor.proximityMeasRate(meas_time_50ms);
+          ALPsensor.proximityMeasRate(MEAS_RATE_50ms);
           break;
         case 70:
-          ALPsensor.proximityMeasRate(meas_time_70ms);
+          ALPsensor.proximityMeasRate(MEAS_RATE_70ms);
           break;
         case 100:
-          ALPsensor.proximityMeasRate(meas_time_100ms);
+          ALPsensor.proximityMeasRate(MEAS_RATE_100ms);
           break;
         case 200:
-          ALPsensor.proximityMeasRate(meas_time_200ms);
+          ALPsensor.proximityMeasRate(MEAS_RATE_200ms);
           break;
         case 500:
-          ALPsensor.proximityMeasRate(meas_time_500ms);
+          ALPsensor.proximityMeasRate(MEAS_RATE_500ms);
           break;
         case 1000:
-          ALPsensor.proximityMeasRate(meas_time_1000ms);
+          ALPsensor.proximityMeasRate(MEAS_RATE_1000ms);
           break;
         case 2000:
-          ALPsensor.proximityMeasRate(meas_time_2000ms);
+          ALPsensor.proximityMeasRate(MEAS_RATE_2000ms);
           break;
         default:
           Serial.println("Proximity meas rates: 10ms, 20ms, 30ms, 50ms, 70ms, 100ms, 200ms, 500ms, 1000ms, 2000ms or 0 for max");
@@ -217,9 +215,9 @@ void serialControl(uint8_t serialData)
    {
      uint8_t sensor = Serial.read();
      if(sensor == 'a')
-       ALPsensor.trigger(ambient);
+       ALPsensor.trigger(AMBIENT);
      else if(sensor == 'p')
-       ALPsensor.trigger(proximity);
+       ALPsensor.trigger(PROXIMITY);
      else
        Serial.println("ta for ambient trigger, tp for proximity trigger");
    }

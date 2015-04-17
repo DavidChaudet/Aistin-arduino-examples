@@ -95,9 +95,9 @@ void opcodeBreath(void) //
   led.genCodePointer = 0x00;
   led.op_mux_map_addr(0x10); //get led mapping from program memory slot 0x10
   led.op_set_pwm(100); //set pwm to 100  
-  led.op_ramp(time_15ms5, UP, 125); //increase pwm 125 times with 15.5ms interval
-  led.op_ramp(time_32ms, DOWN, 125); //decrease pwm 125 times with 15.5ms interval
-  led.op_wait(time_480ms); //wait 480ms
+  led.op_ramp(STEP_15ms5, UP, 125); //increase pwm 125 times with 15.5ms interval
+  led.op_ramp(STEP_32ms, DOWN, 125); //decrease pwm 125 times with 15.5ms interval
+  led.op_wait(STEP_480ms); //wait 480ms
   led.op_branch(0, 2); //loop from 3rd instruction infinitely
   
   led.genCodePointer = 0x10; //set code pointer to 0x10
@@ -124,18 +124,18 @@ void opcodeBreath2(void) //
   led.op_mux_map_addr(mapAddress); //get led mapping from program memory slot 0x10
   led.op_set_pwm(100); //set pwm to 100
   led.op_mux_map_addr(mapAddress); //get led mapping from program memory slot 0x10
-  led.op_ramp(time_15ms5, UP, 1); //increase pwm once with 15.5ms interval
+  led.op_ramp(STEP_15ms5, UP, 1); //increase pwm once with 15.5ms interval
   led.op_mux_sel(LED2_B); //select D4 (middle blue)
-  led.op_ramp(time_16ms, UP, 2); //increase pwm twice with 16ms interval
+  led.op_ramp(STEP_16ms, UP, 2); //increase pwm twice with 16ms interval
   led.op_branch(41, 2); //repeat from 3rd instruction 41 times
   led.op_mux_map_addr(mapAddress); //get led mapping from program memory slot 0x10
-  led.op_ramp(time_16ms, DOWN, 1); //decrease pwm once with 16ms interval
+  led.op_ramp(STEP_16ms, DOWN, 1); //decrease pwm once with 16ms interval
   led.op_mux_sel(LED2_B); //select D4 (middle blue)
-  led.op_ramp(time_32ms, DOWN, 2); //decrease pwm twice with 32ms interval
+  led.op_ramp(STEP_32ms, DOWN, 2); //decrease pwm twice with 32ms interval
   led.op_branch(41, 7);  //repeat from 8th instruction 41 times
   led.op_mux_map_addr(mapAddress); //get led mapping from program memory slot 0x10
-  led.op_ramp(time_32ms, DOWN, 8); //decrease pwm 8 times with 32ms interval
-  led.op_ramp(time_32ms, UP, 8); //increase pwm 8 times with 32ms interval
+  led.op_ramp(STEP_32ms, DOWN, 8); //decrease pwm 8 times with 32ms interval
+  led.op_ramp(STEP_32ms, UP, 8); //increase pwm 8 times with 32ms interval
   led.op_branch(0, 2);  //repeat from 3rd instruction infinitely
   
   led.genCodePointer = mapAddress; //set code pointer to 0x10
@@ -160,10 +160,10 @@ void opcodeBeat(void)
   led.genCodePointer = startAddress; //start generating code from startAddress
   led.op_mux_map_addr(ledAddress); //get led mapping from program memory slot 0x50
   led.op_set_pwm(210); //set pwm to 210
-  led.op_ramp(time_0ms5, UP, 15); //increase mapped leds pwm 15 times with 0.5ms interval
-  led.op_ramp(time_0ms5, DOWN, 225); //decrease mapped leds pwm 225 times with 0.5ms interval
+  led.op_ramp(STEP_0ms5, UP, 15); //increase mapped leds pwm 15 times with 0.5ms interval
+  led.op_ramp(STEP_0ms5, DOWN, 225); //decrease mapped leds pwm 225 times with 0.5ms interval
   led.op_mux_map_next(); //read next mapping
-  led.op_wait(time_256ms); //wait 256ms
+  led.op_wait(STEP_256ms); //wait 256ms
   led.op_branch(3, 1); //repeat from 2nd istruction 3 times
   
   led.genCodePointer = ledAddress; //set pointer to program memory address 0x30
@@ -188,31 +188,31 @@ void opcodeRainbow(void)
   led.op_mux_map_addr(0x20);//select all leds
   led.op_set_pwm(0); //shut down all leds
   led.op_mux_map_addr(0x21); //select led1 red & blue
-  led.op_ramp(time_1ms, UP, 255); //power up led1 red & blue
+  led.op_ramp(STEP_1ms, UP, 255); //power up led1 red & blue
   led.op_mux_sel(LED1_R); //select led1 red
-  led.op_ramp(time_0ms5, DOWN, 5); //decrease led1 red pwm 5 times
+  led.op_ramp(STEP_0ms5, DOWN, 5); //decrease led1 red pwm 5 times
   led.op_mux_sel(LED2_B); //select led2 blue
-  led.op_ramp(time_0ms5, UP, 5); //increase led2 blue pwm 5 times
+  led.op_ramp(STEP_0ms5, UP, 5); //increase led2 blue pwm 5 times
   led.op_branch(51, 4); //repeat last four instructions 51 times
   led.op_mux_sel(LED1_B); //select led1 blue
-  led.op_ramp(time_0ms5, DOWN, 5); //decrease led1 blue pwm 5 times
+  led.op_ramp(STEP_0ms5, DOWN, 5); //decrease led1 blue pwm 5 times
   led.op_mux_sel(LED2_G);  //select led2 green
-  led.op_ramp(time_0ms5, UP, 5); //decrease led2 green pwm 5 times
+  led.op_ramp(STEP_0ms5, UP, 5); //decrease led2 green pwm 5 times
   led.op_branch(51, 9); //repeat last four instructions 51 times
   led.op_mux_sel(LED2_B); //select led2 blue
-  led.op_ramp(time_0ms5, DOWN, 5); //decrease led2 blue pwm 5 times
+  led.op_ramp(STEP_0ms5, DOWN, 5); //decrease led2 blue pwm 5 times
   led.op_mux_sel(LED3_G);  //select led3 green
-  led.op_ramp(time_0ms5, UP, 5); //increase led3 green pwm 5 times
+  led.op_ramp(STEP_0ms5, UP, 5); //increase led3 green pwm 5 times
   led.op_branch(51, 14); //repeat last four instructions 51 times
   led.op_mux_sel(LED2_G); //select led2 green
-  led.op_ramp(time_0ms5, DOWN, 5); //decrease led2 green pwm 5 times
+  led.op_ramp(STEP_0ms5, DOWN, 5); //decrease led2 green pwm 5 times
   led.op_mux_sel(LED3_R);  //select led3 red
-  led.op_ramp(time_0ms5, UP, 5); //increase led3 red pwm 5 times
+  led.op_ramp(STEP_0ms5, UP, 5); //increase led3 red pwm 5 times
   led.op_branch(51, 19); //repeat last four instructions 51 times
   led.op_mux_sel(LED3_G); //select led3 green
-  led.op_ramp(time_0ms5, DOWN, 255); //power down led3 green
+  led.op_ramp(STEP_0ms5, DOWN, 255); //power down led3 green
   led.op_mux_sel(LED3_R); //select led3 red
-  led.op_ramp(time_1ms, DOWN, 255); //power down led3 red
+  led.op_ramp(STEP_1ms, DOWN, 255); //power down led3 red
   
   led.genCodePointer = 0x20;
   led.op_ledMapping(LED1_R | LED1_G | LED1_B | LED2_R | LED2_G | LED2_B | LED3_R | LED3_G | LED3_B); //map all leds
@@ -233,43 +233,43 @@ void opcodeMultiengine(void)
   led.engineStartAddress(ENGINE1, 0x00); //generate engine 1 operational code from 0x00
   led.genCodePointer = 0x00;
   led.op_mux_sel(7);
-  led.op_ramp(time_1ms, UP, 255);
-  led.op_ramp(time_1ms, DOWN, 255);
+  led.op_ramp(STEP_1ms, UP, 255);
+  led.op_ramp(STEP_1ms, DOWN, 255);
   led.op_mux_sel(8);
-  led.op_ramp(time_1ms5, UP, 255);
-  led.op_ramp(time_1ms5, DOWN, 255);
+  led.op_ramp(STEP_1ms5, UP, 255);
+  led.op_ramp(STEP_1ms5, DOWN, 255);
   led.op_mux_sel(9);
-  led.op_ramp(time_1ms, UP, 255);
-  led.op_ramp(time_1ms, DOWN, 255);
+  led.op_ramp(STEP_1ms, UP, 255);
+  led.op_ramp(STEP_1ms, DOWN, 255);
   
   led.engineStartAddress(ENGINE2, 0x10); //generate engine 2 operational code from 0x10
   led.genCodePointer = 0x10;
   led.op_mux_sel(2);
-  led.op_ramp(time_1ms5, UP, 255);
-  led.op_ramp(time_1ms5, DOWN, 255);
+  led.op_ramp(STEP_1ms5, UP, 255);
+  led.op_ramp(STEP_1ms5, DOWN, 255);
   led.op_mux_sel(4);
-  led.op_ramp(time_1ms, UP, 255);
-  led.op_ramp(time_1ms, DOWN, 255);
+  led.op_ramp(STEP_1ms, UP, 255);
+  led.op_ramp(STEP_1ms, DOWN, 255);
   led.op_mux_sel(6);
-  led.op_ramp(time_1ms5, UP, 255);
-  led.op_ramp(time_1ms5, DOWN, 255);
+  led.op_ramp(STEP_1ms5, UP, 255);
+  led.op_ramp(STEP_1ms5, DOWN, 255);
   
   led.engineStartAddress(ENGINE3, 0x20); //generate engine 3 operational code from 0x20
   led.genCodePointer = 0x20;
   led.op_mux_map_addr(0x30);
   led.op_set_pwm(255);
   led.op_mux_sel(1);
-  led.op_ramp(time_1ms5, DOWN, 255);
-  led.op_ramp(time_1ms5, UP, 255);
+  led.op_ramp(STEP_1ms5, DOWN, 255);
+  led.op_ramp(STEP_1ms5, UP, 255);
   led.op_mux_sel(3);
-  led.op_ramp(time_1ms, DOWN, 255);
-  led.op_ramp(time_1ms, UP, 255);
+  led.op_ramp(STEP_1ms, DOWN, 255);
+  led.op_ramp(STEP_1ms, UP, 255);
   led.op_mux_sel(5);
-  led.op_ramp(time_1ms5, DOWN, 255);
-  led.op_ramp(time_1ms5, UP, 255);
+  led.op_ramp(STEP_1ms5, DOWN, 255);
+  led.op_ramp(STEP_1ms5, UP, 255);
   led.op_mux_sel(3);
-  led.op_ramp(time_1ms, DOWN, 255);
-  led.op_ramp(time_1ms, UP, 255);
+  led.op_ramp(STEP_1ms, DOWN, 255);
+  led.op_ramp(STEP_1ms, UP, 255);
   led.op_branch(0, 0x02);
   
   led.genCodePointer = 0x30;
