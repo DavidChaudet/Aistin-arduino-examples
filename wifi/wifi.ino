@@ -78,6 +78,10 @@ const char htmlStart[] PROGMEM = { //Aistin logo, icon & javascript functions
 						"value=[value[0]+','+value[1],value[2]];\r\n"
 					"}\r\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					//"eLength=element.length;\r\n"
+>>>>>>> origin/master
 =======
 					//"eLength=element.length;\r\n"
 >>>>>>> origin/master
@@ -294,6 +298,10 @@ const char cfgPage[] PROGMEM  = { //wlan module configuration page
 void setup() {
   Wire.begin();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  //Serial.begin(9600);
+>>>>>>> origin/master
 =======
   //Serial.begin(9600);
 >>>>>>> origin/master
@@ -351,6 +359,11 @@ void readWifi(void){
     else if(htmlHeader.indexOf("HTTP")>-1){
       //check what browser requested
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      //if(!(htmlHeader.indexOf("cmd")>-1) && !(htmlHeader.indexOf("config=")>-1))
+      //  Serial.println(Serial1.readString());
+>>>>>>> origin/master
 =======
       //if(!(htmlHeader.indexOf("cmd")>-1) && !(htmlHeader.indexOf("config=")>-1))
       //  Serial.println(Serial1.readString());
@@ -378,6 +391,11 @@ void readWifi(void){
     }
     htmlHeader = '\0';
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    //Serial.println(Serial1.readString());
+    //empty serial if there is something non important left
+>>>>>>> origin/master
 =======
     //Serial.println(Serial1.readString());
     //empty serial if there is something non important left
@@ -440,6 +458,12 @@ void customCommand(void){
     Serial1.print(cmd+'\r');
     Serial.println(cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    /*if(cmd.indexOf("AT+Z")==0 && cmd.indexOf("AT+ENTM")==0)
+      response = "";
+    else{*/
+>>>>>>> origin/master
 =======
     /*if(cmd.indexOf("AT+Z")==0 && cmd.indexOf("AT+ENTM")==0)
       response = "";
@@ -457,7 +481,11 @@ void customCommand(void){
     int x,y,z;
     accelero.readRawXYZ(x,y,z);
 <<<<<<< HEAD
+<<<<<<< HEAD
     //accelero.mgScale(x,y,z); //accelerometer data to mg
+=======
+    //accelero.mgScale(x,y,z);
+>>>>>>> origin/master
 =======
     //accelero.mgScale(x,y,z);
 >>>>>>> origin/master
@@ -495,12 +523,18 @@ String atValueToXML(String command){
 }
 void aistinSensorResponse(void){
 <<<<<<< HEAD
+<<<<<<< HEAD
   //responsing we(Aistin) have sensor 0x18(accelerometer)
 =======
+=======
+>>>>>>> origin/master
 //  char device[] = {">D~Aistin@80"};
   //responsing we(Aistin) have sensor 0x18(accelerometer)
 //  Serial1.print(device);Serial1.println("1400$Aistin");
 //  Serial1.print(device);Serial1.println("38:8018");
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
   Serial1.println(">D~Aistin@801400$Aistin");
   Serial1.println(">D~Aistin@8038:8018");
