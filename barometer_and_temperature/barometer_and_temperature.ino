@@ -18,7 +18,7 @@ void setup()
   Serial.begin(9600);  // start serial for output
   barometer.reset();  //reset barometer
   barometer.init();  //initiate barometer
-  barometer.measureRate(meas_rate_12Hz5);  //set measure rate to 12.5Hz
+  barometer.measureRate(MEAS_RATE_12Hz5);  //set measure rate to 12.5Hz
   barometer.pressureDelta(false);  //disable delta pressure
   delay(1000);
 }
@@ -61,23 +61,23 @@ void serialControl(void)
     int measureRate = Serial.parseInt();
     switch(measureRate)
     {
-      case 0:
-        barometer.measureRate(one_shot);
+      case -1:
+        barometer.measureRate(ONE_SHOT);
         break;
       case 1:
-        barometer.measureRate(meas_rate_1Hz);
+        barometer.measureRate(MEAS_RATE_1Hz);
         break;
       case 7:
-        barometer.measureRate(meas_rate_7Hz);
+        barometer.measureRate(MEAS_RATE_7Hz);
         break;
       case 12:
-        barometer.measureRate(meas_rate_12Hz5);
+        barometer.measureRate(MEAS_RATE_12Hz5);
         break;
       case 25:
-        barometer.measureRate(meas_rate_25Hz);
+        barometer.measureRate(MEAS_RATE_25Hz);
         break;
       default:
-        Serial.println("Possible measure rates: 1Hz, 7Hz, 12.5Hz, 25Hz and 0 for one shot");
+        Serial.println("Possible measure rates: 1Hz, 7Hz, 12.5Hz, 25Hz and -1 for one shot");
       while(Serial.available())
         Serial.read();
     }

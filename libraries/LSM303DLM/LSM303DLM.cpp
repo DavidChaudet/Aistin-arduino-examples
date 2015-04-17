@@ -134,7 +134,7 @@ uint16_t LSM303::getResultant(int16_t vector1, int16_t vector2, int16_t vector3)
 	return sqrt(vector1_32bit*vector1_32bit+vector2_32bit*vector2_32bit+vector3_32bit*vector3_32bit); //total acceleration 
 }
 
-void LSM303::writeAccDefaults(void)
+void LSM303::init(void)
 {
 	writeReg (LSM303_CTRL_REG1_A, LSM303_CR1A_DEFAULT);
 	writeReg (LSM303_CTRL_REG2_A, LSM303_CR2A_DEFAULT);

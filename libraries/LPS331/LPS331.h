@@ -29,7 +29,7 @@
 
 #define LPS331_ADDR 0x5C
 
-enum LPS331_meas_rate_t {one_shot, meas_rate_1Hz, meas_rate_7Hz, meas_rate_12Hz5, meas_rate_25Hz};
+enum LPS331_meas_rate_t {ONE_SHOT, MEAS_RATE_1Hz, MEAS_RATE_7Hz, MEAS_RATE_12Hz5, MEAS_RATE_25Hz};
 
 class LPS331 {
 private:

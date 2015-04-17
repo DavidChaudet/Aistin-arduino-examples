@@ -1,5 +1,5 @@
 /*
-	LP5523.h - LP5523 library for iProtoXi Micro
+	BH1772.h - BH1772 library for iProtoXi Micro
 	
 	This program is free software under the MIT License (MIT)
 
@@ -30,9 +30,9 @@
 #define BH1772_ADDR 0x38
 
 enum sensor_mode_control_t {STANDBY_ALP, DISABLE_ALP, TRIGGER_ALP, ON_ALP};
-enum led_current_t {current_5mA, current_10mA, current_20mA, current_50mA, current_100mA, current_150mA, current_200mA};
-enum select_trigger_t {proximity = 1, ambient = 2};
-enum meas_rate_t {meas_time_10ms, meas_time_20ms, meas_time_30ms, meas_time_50ms, meas_time_70ms, meas_time_100ms, meas_time_200ms, meas_time_500ms, meas_time_1000ms, meas_time_2000ms, max_meas_rate};
+enum ir_current_t {IR_CURRENT_5mA, IR_CURRENT_10mA, IR_CURRENT_20mA, IR_CURRENT_50mA, IR_CURRENT_100mA, IR_CURRENT_150mA, IR_CURRENT_200mA};
+enum select_trigger_t {PROXIMITY = 1, AMBIENT = 2};
+enum BH1772_meas_rate_t {MEAS_RATE_10ms, MEAS_RATE_20ms, MEAS_RATE_30ms, MEAS_RATE_50ms, MEAS_RATE_70ms, MEAS_RATE_100ms, MEAS_RATE_200ms, MEAS_RATE_500ms, MEAS_RATE_1000ms, MEAS_RATE_2000ms, MAX_MEAS_RATE};
 
 class BH1772 {
 private:
@@ -41,10 +41,10 @@ public:
 	void reset(void);
 	void ambientMode(sensor_mode_control_t);
 	void proximityMode(sensor_mode_control_t);
-	void ledCurrent(led_current_t);
+	void irCurrent(ir_current_t);
 	void trigger(select_trigger_t);
-	void proximityMeasRate(meas_rate_t);
-	bool ambientMeasRate(meas_rate_t);
+	void proximityMeasRate(BH1772_meas_rate_t);
+	bool ambientMeasRate(BH1772_meas_rate_t);
 	uint16_t readAmbient(void);
 	uint8_t readProximity(void);
 	void selectInterrupt(select_trigger_t);

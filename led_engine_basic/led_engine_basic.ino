@@ -16,7 +16,6 @@ LP5523 led;
 void setup()
 {
   Wire.begin(); // join i2c bus
-  Serial.begin(9600); // start serial
   led.reset(); // reset the controller
   led.init(); // initialize the controller
   led.setLogDimm(true); // set logarithmic dimming
@@ -35,13 +34,12 @@ void opcodeBreath(void) //
   Breath opcode generating function.
   Basic example for opcode generation.
 */
-  Serial.println("2. Breath");
   led.genCodePointer = 0x00;
   led.op_mux_map_addr(0x10); //get led mapping from program memory slot 0x10
   led.op_set_pwm(100); //set pwm to 100  
-  led.op_ramp(time_15ms5, UP, 125); //increase pwm 125 times with 15.5ms interval
-  led.op_ramp(time_32ms, DOWN, 125); //decrease pwm 125 times with 15.5ms interval
-  led.op_wait(time_480ms); //wait 480ms
+  led.op_ramp(STEP_15ms5, UP, 125); //increase pwm 125 times with 15.5ms interval
+  led.op_ramp(STEP_32ms, DOWN, 125); //decrease pwm 125 times with 15.5ms interval
+  led.op_wait(STEP_480ms); //wait 480ms
   led.op_branch(0, 2); //loop from 3rd instruction infinitely
   
   led.genCodePointer = 0x10; //set code pointer to 0x10

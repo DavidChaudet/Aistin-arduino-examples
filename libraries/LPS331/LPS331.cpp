@@ -52,19 +52,19 @@ void LPS331::measureRate(LPS331_meas_rate_t measureRate)
 	writeReg(0x20, (val20 & 0x7F));
 	switch(measureRate)
 	{
-	case one_shot:
+	case ONE_SHOT:
 		val20 = (0x8F & val20) | 0x00;
 		break;
-	case meas_rate_1Hz:
+	case MEAS_RATE_1Hz:
 	    val20 = (0x8F & val20) | 0x10;
 		break;
-	case meas_rate_7Hz:
+	case MEAS_RATE_7Hz:
 	    val20 = (0x8F & val20) | 0x50;
 		break;
-	case meas_rate_12Hz5:
+	case MEAS_RATE_12Hz5:
 	    val20 = (0x8F & val20) | 0x60;
 		break;
-	case meas_rate_25Hz:
+	case MEAS_RATE_25Hz:
 	    val20 = (0x8F & val20) | 0x70;
 		break;
 	}

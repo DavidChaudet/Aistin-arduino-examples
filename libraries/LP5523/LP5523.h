@@ -37,13 +37,13 @@ enum led_selection_t { 	LED1_R = 0x0040, LED1_G = 0x0001, LED1_B = 0x0002, LED2_
 						LED2_B = 0x0008, LED3_R = 0x0100, LED3_G = 0x0010, LED3_B = 0x0020, GPO  = 0x8000 };
 enum sign_t { UP, DOWN };
 enum prescale_t { NOPRESCALE, PRESCALE };
-enum step_time_t {	time_0ms5 = 1, time_1ms, time_1ms5, time_2ms, time_2ms5, time_3ms, time_3ms5, time_4ms, time_4ms5, time_5ms,
-					time_5ms5, time_6ms, time_6ms5, time_7ms, time_7ms5, time_8ms, time_8ms5, time_9ms, time_9ms5, time_10ms,
-					time_10ms5, time_11ms, time_11ms5, time_12ms, time_12ms5, time_13ms, time_13ms5, time_14ms, time_14ms5, time_15ms, 
-					time_15ms5, time_16ms = 33, time_32ms, time_48ms, time_64ms, time_80ms, time_96ms, time_112ms, time_128ms, time_144ms,
-					time_160ms, time_176ms, time_192ms, time_208ms, time_224ms, time_240ms, time_256ms, time_272ms, time_288ms, time_304ms,
-					time_320ms, time_336ms, time_352ms, time_368ms, time_384ms, time_400ms, time_416ms, time_432ms, time_448ms, time_464ms,
-					time_480ms, time_496ms };
+enum step_time_t {	STEP_0ms5 = 1, STEP_1ms, STEP_1ms5, STEP_2ms, STEP_2ms5, STEP_3ms, STEP_3ms5, STEP_4ms, STEP_4ms5, STEP_5ms,
+					STEP_5ms5, STEP_6ms, STEP_6ms5, STEP_7ms, STEP_7ms5, STEP_8ms, STEP_8ms5, STEP_9ms, STEP_9ms5, STEP_10ms,
+					STEP_10ms5, STEP_11ms, STEP_11ms5, STEP_12ms, STEP_12ms5, STEP_13ms, STEP_13ms5, STEP_14ms, STEP_14ms5, STEP_15ms, 
+					STEP_15ms5, STEP_16ms = 33, STEP_32ms, STEP_48ms, STEP_64ms, STEP_80ms, STEP_96ms, STEP_112ms, STEP_128ms, STEP_144ms,
+					STEP_160ms, STEP_176ms, STEP_192ms, STEP_208ms, STEP_224ms, STEP_240ms, STEP_256ms, STEP_272ms, STEP_288ms, STEP_304ms,
+					STEP_320ms, STEP_336ms, STEP_352ms, STEP_368ms, STEP_384ms, STEP_400ms, STEP_416ms, STEP_432ms, STEP_448ms, STEP_464ms,
+					STEP_480ms, STEP_496ms };
 enum engines_t { ENGINE1 = 1, ENGINE2 = 2, ENGINE3 = 4 };
 enum eng_instr_t { DISABLE = 0b0000, LOAD = 0b0100, HOLD = 0b1000, STEP = 0b1001, FREE_RUN = 0b1010, EXEC_ONCE = 0b1011, HALT = 0b1100 };
 enum variable_t { VARIABLE_A, VARIABLE_B, VARIABLE_C, VARIABLE_D }; //variables A & B are per engine, C is public and D is value from register address 0x3C
@@ -89,20 +89,20 @@ public:
 	bool op_jump_if_less(uint8_t, variable_t, variable_t);
 	bool op_jump_if_greater(uint8_t, variable_t, variable_t);
 	bool op_jump_if_equal(uint8_t, variable_t, variable_t);
-	void resetCode(void);
-	void uploadCode(void);
-	void engineStartAddress(uint8_t, uint8_t);
-	void engineControl(uint8_t, eng_instr_t);
-	void init(void);
-	void reset(void);
-	void setCurrent(uint8_t);
-	void setLogDimm(bool);
-	void setLed(uint8_t, uint8_t, uint8_t, uint8_t);
-	void tempControl(temperature_control_t);
+	void resetCode(void); //resets currently generated op code
+	void uploadCode(void); //uploads code to program memory, remember to set engines to load mode
+	void engineStartAddress(uint8_t, uint8_t); //set engine program start address 0x00-0x5F
+	void engineControl(uint8_t, eng_instr_t); //set engine mode
+	void init(void); //initiate controller with basic settings
+	void reset(void); //reset & turn off the controller
+	void setCurrent(uint8_t); //output current control, 8-bits, 100µA step size
+	void setLogDimm(bool); //enable or disable logarithmic dimming control
+	void setLed(uint8_t, uint8_t, uint8_t, uint8_t); //set led red, green & blue PWM registers
+	void tempControl(temperature_control_t); //set temperature control settings
 	int8_t readTemperature(void);
-	void writeTemperature(uint8_t);
-	uint8_t readReg(uint8_t);
-	void writeReg(uint8_t, uint8_t);
+	void writeTemperature(uint8_t); //set temperature, for testing or external sensor
+	uint8_t readReg(uint8_t); //read register value
+	void writeReg(uint8_t, uint8_t); //set register value
 	};
 
 #endif

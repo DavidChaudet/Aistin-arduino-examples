@@ -46,7 +46,7 @@ void BH1772::proximityMode(sensor_mode_control_t PS_mode)
 	reg41 = (reg41 & 0xFC) | PS_mode;
 	writeReg(0x41, reg41);
 }
-void BH1772::ledCurrent(led_current_t current)
+void BH1772::irCurrent(ir_current_t current)
 {
 	writeReg(0x42, (0x18 + current));
 }
@@ -54,34 +54,34 @@ void BH1772::trigger(select_trigger_t trigger)
 {
 	writeReg(0x44, trigger);
 }
-void BH1772::proximityMeasRate(meas_rate_t meas_rate)
+void BH1772::proximityMeasRate(BH1772_meas_rate_t meas_rate)
 {
 	uint8_t reg45 = meas_rate;
-	if(reg45 == max_meas_rate)
+	if(reg45 == MAX_MEAS_RATE)
 		reg45 = 0x00;
 	writeReg(0x45, reg45);
 }
-bool BH1772::ambientMeasRate(meas_rate_t meas_rate)
+bool BH1772::ambientMeasRate(BH1772_meas_rate_t meas_rate)
 {
 	uint8_t reg46;
 	switch(meas_rate)
 	{
-	case max_meas_rate:
+	case MAX_MEAS_RATE:
 		reg46 = 0x80;
 		break;
-	case meas_time_100ms:
+	case MEAS_RATE_100ms:
 		reg46 = 0x00;
 		break;
-	case meas_time_200ms:
+	case MEAS_RATE_200ms:
 		reg46 = 0x01;
 		break;
-	case meas_time_500ms:
+	case MEAS_RATE_500ms:
 		reg46 = 0x02;
 		break;
-	case meas_time_1000ms:
+	case MEAS_RATE_1000ms:
 		reg46 = 0x03;
 		break;
-	case meas_time_2000ms:
+	case MEAS_RATE_2000ms:
 		reg46 = 0x04;
 		break;
 	default:
@@ -93,7 +93,7 @@ bool BH1772::ambientMeasRate(meas_rate_t meas_rate)
 }
 uint16_t BH1772::readAmbient(void)
 {
-	return readReg(0x4C) + readReg(0x4D)*16;
+	return readReg(0x4C) + readReg(0x4D)*256;
 }
 uint8_t BH1772::readProximity(void)
 {

@@ -16,7 +16,7 @@ void setup()
 {
   Wire.begin(); // join i2c bus
   Serial.begin(9600); // start serial
-  accelerometer.writeAccDefaults(); // init accelerometer
+  accelerometer.init(); // init accelerometer
   accelerometer.setODR(ODR_100HZ); //set output data rate to 100Hz
   delay(1000);
 }
@@ -100,11 +100,11 @@ void serialControl(void)
   {
     int scale = Serial.read();
     if(scale == '2') //if G2
-      accelerometer.setScale(scale_2g);
+      accelerometer.setScale(SCALE_2g);
     else if(scale == '4') //if G4
-      accelerometer.setScale(scale_4g);
+      accelerometer.setScale(SCALE_4g);
     else if(scale == '8') //if G8
-      accelerometer.setScale(scale_8g);
+      accelerometer.setScale(SCALE_8g);
     if(scale - 48 == accelerometer.getScale()) //check scale is succesfully set
       Serial.println("Scale set");
     else
