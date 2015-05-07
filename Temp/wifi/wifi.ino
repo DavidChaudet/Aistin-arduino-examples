@@ -1,8 +1,8 @@
 #include <Wire.h>
-#include <LSM303DLM.h>
+#include <LIS3DSH.h>
 #include <avr/pgmspace.h>
 
-LSM303 accelero;
+LIS3DSH accelero;
 const char httpResponse[] PROGMEM = {
 "HTTP/1.1 200 OK\r\n"
 "Content-Length: \r\n"
@@ -12,20 +12,20 @@ const char htmlStart[] PROGMEM = { //Aistin logo, icon & javascript functions
 "<!DOCTYPE html>\r\n"
 "<html>\r\n"
 "<head>\r\n"
-"<link rel='shortcut icon' href='data:image/jpeg;base64,AAABAAEAICAQAAEABADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAA"
-"AAAAAAAAAAAAAAAAAAAAAAAAAAAAACXOgAAnUUBAKVWFgCzbzcAMGPvAMCHWgBPevEA0qqJAIum9"
-"wDdwKoAwtL7AO7f0gDj6/wA/PjyAPz//gAAAAAA7u7u7u7u7u7t7u2+3u7u7u7u7u7u7u7u7u3rD"
-"e7u7u7u7u7u7u7u7u7u4iLu7u7u7u7u7u7u7u7u7tEinu7u7u7u7u7u7u7u7u6yMg3t7u7u7u7u7"
-"u7u7u3uMtIn7u7u7u7u7u7u7u7u7QHeI+7u7u7u7u7u7u7u7usl7THu7u7u7u7u7u7u7u7nLu2Rn"
-"u7u7u7u7u7u7u7t4y7u4H7u7u7u7u7u7u7u7uC+7uGe7u7e7u7u7u7u7u2y7u7hvu7u7u7u7u7u7"
-"u7tee7t4e7u7u7t7d7u3u7u7n7e7uXu7u7e7e7u7e7u7d7e7t597u7u7uhkRq7u3t7pUhEl3u3u7"
-"t2GSIhI7u7rITESEgve7u7uRt7u5K7uUSI77uUj7u7u3Gju7u2N0CI+7u7uMe7u7uxI3e7uqxIr7"
-"u7u3iHt7u7uZu7u7pIh3u7u3tsl3u7u7uRu7dciLe7u7u7iHe7u7u7shGySIu7u7u7u4l7u7u7u7"
-"e7rIj7e7u7t7ZG97u7l7u7usSLu7u7u7u4w7e7ue+7d6wIt7u7u7u7uMu7t2X7u7pEi3u7u7u7u7"
-"nDe7VXu7uIiHu7u7u7u7u7iEiCe7uIiF+7u7u7u7u7u7dm97u4iE97u7u7u7u7u7u7u7u7uF77u7"
-"u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=='/>\r\n"
+//"<link rel='shortcut icon' href='data:image/jpeg;base64,AAABAAEAICAQAAEABADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAA"
+//"AAAAAAAAAAAAAAAAAAAAAAAAAAAAACXOgAAnUUBAKVWFgCzbzcAMGPvAMCHWgBPevEA0qqJAIum9"
+//"wDdwKoAwtL7AO7f0gDj6/wA/PjyAPz//gAAAAAA7u7u7u7u7u7t7u2+3u7u7u7u7u7u7u7u7u3rD"
+//"e7u7u7u7u7u7u7u7u7u4iLu7u7u7u7u7u7u7u7u7tEinu7u7u7u7u7u7u7u7u6yMg3t7u7u7u7u7"
+//"u7u7u3uMtIn7u7u7u7u7u7u7u7u7QHeI+7u7u7u7u7u7u7u7usl7THu7u7u7u7u7u7u7u7nLu2Rn"
+//"u7u7u7u7u7u7u7t4y7u4H7u7u7u7u7u7u7u7uC+7uGe7u7e7u7u7u7u7u2y7u7hvu7u7u7u7u7u7"
+//"u7tee7t4e7u7u7t7d7u3u7u7n7e7uXu7u7e7e7u7e7u7d7e7t597u7u7uhkRq7u3t7pUhEl3u3u7"
+//"t2GSIhI7u7rITESEgve7u7uRt7u5K7uUSI77uUj7u7u3Gju7u2N0CI+7u7uMe7u7uxI3e7uqxIr7"
+//"u7u3iHt7u7uZu7u7pIh3u7u3tsl3u7u7uRu7dciLe7u7u7iHe7u7u7shGySIu7u7u7u4l7u7u7u7"
+//"e7rIj7e7u7t7ZG97u7l7u7usSLu7u7u7u4w7e7ue+7d6wIt7u7u7u7uMu7t2X7u7pEi3u7u7u7u7"
+//"nDe7VXu7uIiHu7u7u7u7u7iEiCe7uIiF+7u7u7u7u7u7dm97u4iE97u7u7u7u7u7u7u7u7uF77u7"
+//"u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+//"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+//"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=='/>\r\n"
 "<title>Aistin</title>\r\n"
 "<img src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAdwB3AAD/2wBDAAYEBQYFBAYGBQYHBwYIC"
 "hAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHB"
@@ -288,10 +288,33 @@ const char cfgPage[] PROGMEM  = { //wlan module configuration page
 }; //end of cfgPage[]
 
 void setup() {
+  pinMode(4, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(8, OUTPUT);
+  digitalWrite(4, HIGH); //Sensor enable
+  digitalWrite(6, HIGH); //Radio enable
+  digitalWrite(8, HIGH); //Pulse RINT
+  digitalWrite(8, LOW);
+  delay(100);
   Wire.begin();
   Serial.begin(38400);
   accelero.init(); //initiate motion sensor
+  while(!Serial);
+  Serial1.begin(115200);
+  while(!Serial1);
+  Serial.println("S1 found");
+  if(enterAtMode()){
+    Serial1.print("AT+UART=38400,8,1,None,NFC\r");
+    if(Serial1.find("+ok"))
+      Serial.println(" ok!");
+    else
+      Serial.println(" error!");
+    Serial1.print("AT+Z\r");
+    Serial1.end();
+    delay(1000);
+  }
   Serial1.begin(38400); //Start serial1 connection 38400Bd
+  delay(100);
 }
 
 void loop() {
@@ -302,6 +325,22 @@ void loop() {
     if(serialData == "AT") 
       //type "AT" into serial to enter AT command mode
       enterAtMode();
+    else if(serialData == "dis"){
+      Serial.println("disable");
+      digitalWrite(6, LOW); //Radio enable
+      //delay(1);
+      digitalWrite(8, HIGH); //Pulse RINT
+      //delay(0.001);
+      digitalWrite(8, LOW);
+    }
+    else if(serialData == "en"){
+      Serial.println("enable");
+      digitalWrite(6, HIGH); //Radio enable
+      //delay(1);
+      digitalWrite(8, HIGH); //Pulse RINT
+      //delay(0.001);
+      digitalWrite(8, LOW);
+    }
     else
       Serial1.print(serialData + "\r");
       //send commands from serial wifi module
@@ -431,13 +470,13 @@ void customCommand(void){
   }
   else if(cmd.indexOf("accel")==0){
     int x,y,z;
-    accelero.readRawXYZ(x,y,z);
+    accelero.readXYZ(x,y,z);
     response = String(x) +' '+ String(y) +' '+ String(z);
   }
   sendHttpResponse(response.length());
   Serial1.print(response);
 }
-void enterAtMode(void)
+bool enterAtMode(void)
 {
   //Serial.println("Entering AT mode");
   delay(250);
@@ -453,7 +492,9 @@ void enterAtMode(void)
   else{
     Serial.println("Error");
     Serial1.print('\r');
+    return false;
   }
+  return true;
 }
 String atValueToXML(String command){
   Serial1.print("AT+"+command+'\r');
@@ -472,7 +513,7 @@ void aistinSensorResponse(void){
 void aistinAccelData(void){
   int signedX, signedY, signedZ;
   unsigned int x,y,z;
-  accelero.readRawXYZ(signedX,signedY,signedZ);
+  accelero.readXYZ(signedX,signedY,signedZ);
   x = signedX;
   y = signedY;
   z = signedZ;

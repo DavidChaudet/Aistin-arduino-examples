@@ -9,7 +9,7 @@
 
 #include <Wire.h>
 
-#define ACC_ADDR      0x18 //Accelerometer address
+#define ACC_ADDR      0x1D//Accelerometer address
 #define CTRL_REG1_A   0x20 //Accelerometer Control Register 1 register address
 #define CTRL_REG4_A   0x23 //Accelerometer Control Register 2 register address
 #define NORMAL_PM     0x20 //CTRL_REG1_A normal powermode
@@ -23,7 +23,7 @@
 
 void initAcc()
 {
-  writeAccRegs(CTRL_REG1_A, NORMAL_PM | DR_400 | EN_XYZ); //Set CTRL_REG1_A to normal power mode, 400Hz datarate and enable x, y, z axels 
+  writeAccRegs(CTRL_REG1_A, NORMAL_PM | DR_100 | EN_XYZ); //Set CTRL_REG1_A to normal power mode, 400Hz datarate and enable x, y, z axels 
   writeAccRegs(CTRL_REG4_A, SCALE_2G); //Set CTRL_REG4_A to use scale -2g to +2g
 }
 
