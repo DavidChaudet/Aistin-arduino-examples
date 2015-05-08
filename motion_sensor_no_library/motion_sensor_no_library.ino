@@ -9,7 +9,7 @@
 
 #include <Wire.h>
 
-#define ACC_ADDR      0x1D//Accelerometer address
+#define ACC_ADDR      0x18 //Accelerometer address
 #define CTRL_REG1_A   0x20 //Accelerometer Control Register 1 register address
 #define CTRL_REG4_A   0x23 //Accelerometer Control Register 2 register address
 #define NORMAL_PM     0x20 //CTRL_REG1_A normal powermode
