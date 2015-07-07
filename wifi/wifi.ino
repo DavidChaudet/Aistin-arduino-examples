@@ -1,3 +1,10 @@
+/* 
+ * wifi.ino
+ * Example code for wifi board
+ * More info at readme.md
+ * 
+ * By J. Piippo iProtoXi 2015-07-07
+*/ 
 #include <Time.h>
 #include <Wire.h>
 #include <LIS3DSH.h>

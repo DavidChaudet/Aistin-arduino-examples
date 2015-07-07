@@ -1,3 +1,14 @@
+/* 
+ * MOT.ino
+ * example code for MOT board
+ *
+ * Prints Acceleration, gyroscope & 
+ * magnetometer sensor values into serial
+ * Change sensor currently in use by sending 
+ * anything to serial
+ * By J. Piippo iProtoXi 2015-07-07
+*/ 
+
 #include <Wire.h>
 #include <LIS3DSH.h>
 #include <L3GD20H.h>
@@ -30,7 +41,7 @@ void acceleration(void)
     delay(100);
     accel.readXYZ(x, y, z);
     accel.mgScale(x, y, z);
-    Serial.print("x: "); //print everything
+    Serial.print("acceleration x: "); //print everything
     Serial.print(x);
     Serial.print(" mg \ty: ");
     Serial.print(y);
@@ -51,7 +62,7 @@ void rotation(void)
   {
     delay(100);
     gyro.readXYZ(x, y, z);
-    Serial.print("x: "); //print everything
+    Serial.print("gyroscope x: "); //print everything
     Serial.print(x);
     Serial.print("    \ty: ");
     Serial.print(y);
@@ -71,7 +82,7 @@ void magnetic(void)
   {
     delay(100);
     magn.readXYZ(x, y, z);
-    Serial.print("x: "); //print everything
+    Serial.print("magnetometer x: "); //print everything
     Serial.print(x);
     Serial.print("    \ty: ");
     Serial.print(y);

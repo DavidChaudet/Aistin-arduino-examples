@@ -1,13 +1,24 @@
+/* 
+ * ENV.ino
+ * example code for ENV board
+ *
+ * Prints UV, pressure, humidity, temperature,
+ * light & proximity sensor values into serial
+ * Change sensor currently in use by sending 
+ * anything to serial
+ * By J. Piippo 2015-07-07
+*/ 
+
 #include <Wire.h>
 #include <UVIS25.h>
 #include <LPS25H.h>
 #include <HTS221.h>
 #include <TCS37725FN.h>
 
-UVIS25 UVS;
-LPS25H baro;
-HTS221 HTS;
-TCS37725FN LPS;
+UVIS25 UVS; //Ultraviolet sensor
+LPS25H baro; //Barometer
+HTS221 HTS; //Humidity & temperature sensor
+TCS37725FN LPS; //Light & proximity sensor
 
 void setup(){
   digitalWrite(4, HIGH); //Sensor enable
@@ -50,7 +61,7 @@ void pressure(void)
   {
     delay(100);
     press = baro.readPressure();
-    Serial.print("Pressure: "); //print everything
+    Serial.print("Pressure: "); //print pressure
     Serial.println(press);
     if(Serial.available())
     {
@@ -67,7 +78,7 @@ void humidityAndTemperature(void)
     delay(100);
     humi = HTS.readHumidity();
     temp = HTS.readTemperature();
-    Serial.print("Humidity: "); //print everything
+    Serial.print("Humidity: "); //print humidity & temperature
     Serial.println(humi);
     Serial.print("Temperature: ");
     Serial.println(temp);
@@ -92,14 +103,6 @@ void lightAndProximity(void)
                          "colours: " + String(red) + " " + String(green) + " " + String(blue) + "\r\n"
                          "proximity: " + String(proximity) + "\r\n";
     Serial.print(printString);
-                         /*
-    Serial.print("clear: "); //print everything
-    Serial.println(ambient);
-    Serial.print("colours: ");
-    Serial.print(red);Serial.print(' ');;Serial.print(green);;Serial.print(' ');Serial.println(blue);
-    Serial.print("proximity: ");
-    Serial.println(proximity);
-    */
     if(Serial.available())
     {
       Serial.read();

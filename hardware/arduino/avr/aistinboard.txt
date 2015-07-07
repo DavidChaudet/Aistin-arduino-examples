@@ -1,0 +1,34 @@
+
+##############################################################
+
+aistin.name=Aistin CPU 2
+aistin.vid.0=0x28FA
+aistin.pid.0=0x0036
+aistin.vid.1=0x28FA
+aistin.pid.1=0x8046
+aistin.upload.tool=avrdude
+aistin.upload.protocol=avr109
+aistin.upload.maximum_size=28672
+aistin.upload.maximum_data_size=2560
+aistin.upload.speed=57600
+aistin.upload.disable_flushing=true
+aistin.upload.use_1200bps_touch=true
+aistin.upload.wait_for_upload_port=true
+
+aistin.bootloader.tool=avrdude
+aistin.bootloader.low_fuses=0xff
+aistin.bootloader.high_fuses=0xd8
+aistin.bootloader.extended_fuses=0xcb
+aistin.bootloader.file=aistin/aistin-cpu2-bootloader.hex
+aistin.bootloader.unlock_bits=0xFF
+aistin.bootloader.lock_bits=0xEF
+
+aistin.build.mcu=atmega32u4
+aistin.build.f_cpu=16000000L
+aistin.build.vid=0x28FA
+aistin.build.pid=0x8046
+aistin.build.usb_product="Aistin CPU2"
+aistin.build.board=AVR_AISTIN
+aistin.build.core=aistin
+aistin.build.variant=iprotoxi_aistin
+aistin.build.extra_flags={build.usb_flags}

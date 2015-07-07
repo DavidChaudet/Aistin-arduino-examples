@@ -1,14 +1,12 @@
 /* 
- * TimeSerial.pde
- * example code illustrating Time library set through serial port messages.
+ * RTC.ino
+ * example code for Real Time Clock
  *
- * Messages consist of the letter T followed by ten digit time (as seconds since Jan 1 1970)
- * you can send the text on the next line using Serial Monitor to set the clock to noon Jan 1 2013
- T1357041600  
- *
- * A Processing example sketch to automatically send the messages is inclided in the download
- * On Linux, you can use "date +T%s\n > /dev/ttyACM0" (UTC time zone)
- */ 
+ * You can set time with message 't<unix timestamp>' 
+ * 
+ * On Linux, you can use "date +t%s\n > /dev/ttyACM0"
+ * By J. Piippo iProtoXi 2015-07-07
+*/ 
  
 #include <Time.h>
 #include <aistin.h>
@@ -20,10 +18,9 @@ RV4162 RTC;
 void setup()  {
   Wire.begin();
   Serial.begin(9600);
-  delay(1500-(millis()%1000)); //prevent second changing at the same time we are reading it later
   setSyncProvider(rtcSync);  //set sync function
   while(!Serial);
-  Serial.println("give time in unix format eg. 't1433123456'");
+  Serial.println("give time in unix format prefixed with 't' eg. 't1433123456'");
   //setSyncInterval(60); //set sync interval
 }
 
@@ -74,8 +71,9 @@ void serialControl() {
   char serialData = Serial.read();
   if(serialData == 't') { // Sync RTC & Arduino to the time given through serial
     uint32_t serialTime = Serial.parseInt();
-     RTC.setTime(serialTime); 
-     setTime(serialTime);
+    delay(100);
+    RTC.setTime(serialTime); 
+    setTime(serialTime);
   }
   else if(serialData == 's') //Sync Arduino clock with the time of RTC
     setTime(RTC.now());

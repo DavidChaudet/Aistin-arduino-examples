@@ -53,8 +53,8 @@ const u16 STRING_LANGUAGE[2] = {
 
 const u16 STRING_IPRODUCT[17] = {
 	(3<<8) | (2+2*16),
-#if USB_PID == 0x8036	
-	'i','P','r','o','t','o','x','i',' ','M','i','c','r','o',' ',' '
+#if USB_PID == 0x8046
+	'i','P','r','o','t','o','x','i',' ','A','i','s','t','i','n',' '
 #else
 #error "unknown PID"
 #endif
