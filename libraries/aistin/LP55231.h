@@ -33,7 +33,7 @@
 
 
 enum led_selection_t { 	LED1_R = 0x0040, LED1_G = 0x0001, LED1_B = 0x0002, LED2_R = 0x0080, LED2_G = 0x0004, 
-						LED2_B = 0x0008, LED3_R = 0x0100, LED3_G = 0x0010, LED3_B = 0x0020, GPO  = 0x8000 };
+						LED2_B = 0x0008, LED3_R = 0x0100, LED3_G = 0x0010, LED3_B = 0x0020};
 enum sign_t { UP, DOWN };
 enum prescale_t { NOPRESCALE, PRESCALE };
 enum step_time_t {	STEP_0ms5 = 1, STEP_1ms, STEP_1ms5, STEP_2ms, STEP_2ms5, STEP_3ms, STEP_3ms5, STEP_4ms, STEP_4ms5, STEP_5ms,

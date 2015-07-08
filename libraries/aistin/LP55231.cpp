@@ -120,9 +120,6 @@ bool LP55231::op_mux_sel(led_selection_t LED_select) //one led select function f
 		case LED3_B:
 		selectedLed = 6;
 		break;
-		case GPO:
-		selectedLed = 16;
-		break;
 	}
 	genCode[genCodePointer] = 0x9D00 + selectedLed; //LED_select selects one
 	return genCodePointerIncrement();
