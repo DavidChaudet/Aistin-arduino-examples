@@ -41,7 +41,7 @@ void acceleration(void)
     delay(100);
     accel.readXYZ(x, y, z);
     accel.mgScale(x, y, z);
-    Serial.print("acceleration x: "); //print everything
+    Serial.print("acceleration \tx: "); //print everything
     Serial.print(x);
     Serial.print(" mg \ty: ");
     Serial.print(y);
@@ -62,7 +62,7 @@ void rotation(void)
   {
     delay(100);
     gyro.readXYZ(x, y, z);
-    Serial.print("gyroscope x: "); //print everything
+    Serial.print("gyroscope \tx: "); //print everything
     Serial.print(x);
     Serial.print("    \ty: ");
     Serial.print(y);
@@ -82,7 +82,7 @@ void magnetic(void)
   {
     delay(100);
     magn.readXYZ(x, y, z);
-    Serial.print("magnetometer x: "); //print everything
+    Serial.print("magnetometer \tx: "); //print everything
     Serial.print(x);
     Serial.print("    \ty: ");
     Serial.print(y);

@@ -13,6 +13,7 @@ LP55231 led;
 
 void setup()
 {
+  digitalWrite(4, HIGH); //Sensor enable
   Wire.begin(); // join i2c bus
   led.reset(); // reset the controller
   led.init(); // initialize the controller

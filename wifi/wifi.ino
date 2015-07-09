@@ -312,9 +312,8 @@ void setup() {
   while(!Serial);
   Serial1.begin(115200);
   while(!Serial1);
-  /*
-  if(enterAtMode()){ //set few default configs
-    Serial1.print("AT+WMODE=APSTA\r");
+  if(enterAtMode()){ //check if device is set to 115200baud
+    Serial1.print("AT+WMODE=APSTA\r"); //set few default configs
     Serial1.find("+ok");
     Serial1.print("AT+UART=38400,8,1,None,NFC\r");
     Serial1.find("+ok");
@@ -325,7 +324,6 @@ void setup() {
     delay(1000);
   }
   Serial1.begin(38400); //Start serial1 connection 38400Bd
-  */
   delay(100);
 }
 
