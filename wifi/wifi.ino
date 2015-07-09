@@ -309,15 +309,14 @@ void setup() {
   Wire.begin();
   Serial.begin(38400);
   accelero.init(); //initiate motion sensor
-  while(!Serial);
   Serial1.begin(115200);
   while(!Serial1);
-  if(enterAtMode()){ //check if device is set to 115200baud
-    Serial1.print("AT+WMODE=APSTA\r"); //set few default configs
+  if(enterAtMode()){ //check if device is set to 115200baud and if so, set it to 38400baud and WMODE & NETP settings to correct values
+    Serial1.print("AT+WMODE=APSTA\r");
     Serial1.find("+ok");
     Serial1.print("AT+UART=38400,8,1,None,NFC\r");
     Serial1.find("+ok");
-    Serial1.print("AT+NETP=TCP,Server,33170,87.92.73.117\r");
+    Serial1.print("AT+NETP=TCP,Server,33170,10.10.100.100\r");
     Serial1.find("+ok");
     Serial1.print("AT+Z\r");
     Serial1.end();
@@ -383,7 +382,7 @@ void readWifi(void){
     htmlHeader = htmlHeader.substring(0,htmlHeader.indexOf("\r\n")); //shorten the string
     if(htmlHeader.indexOf(">S")>-1 || htmlHeader.indexOf("~_s")>-1)
       aistinSensorResponse();
-    else if(htmlHeader.indexOf("@18A806")>-1)
+    else if(htmlHeader.indexOf("@1DA806")>-1)
       aistinAccelData();
     else if((htmlHeader.indexOf("^Aistin@800501:01")>-1) || (htmlHeader.indexOf("factoryreset")>-1)){
       enterAtMode();
@@ -516,9 +515,9 @@ String atValueToXML(String command){
   return '<'+command+'>'+value+"</"+command+">\r\n";
 }
 void aistinSensorResponse(void){
-  //responsing we(Aistin) have sensor 0x18(accelerometer)
+  //responsing we(Aistin) have sensor 0x1D(accelerometer)
   Serial1.println(">D~Aistin@801400$Aistin");
-  Serial1.println(">D~Aistin@8038:8018");
+  Serial1.println(">D~Aistin@8038:801D");
 }
 void aistinAccelData(void){
   int signedX, signedY, signedZ;
@@ -527,8 +526,8 @@ void aistinAccelData(void){
   x = signedX;
   y = signedY;
   z = signedZ;
-  //responsing our (aistin) sensor 0x18 (accelerometer) reg values 0x18 - 0x1D (A806) are
-  Serial1.print(">D~aistin@18A806:");
+  //responsing our (aistin) sensor 0x1D (accelerometer) reg values 0x18 - 0x1D (A806) are
+  Serial1.print(">D~Aistin@1DA806:");
   //smashing sensor values to hex and rearraging them to same order as in the register
   Serial1.print((x>>4)%16,HEX);
   Serial1.print((x>>0)%16,HEX);
