@@ -14,7 +14,7 @@
 LP55231 led;
 uint8_t turnOn = 0;
 
-int latestProgram = 0;
+uint8_t latestProgram = 0;
 
 
 void setup()
@@ -298,12 +298,14 @@ void loop()
   delay(50);
   int statusA5 = analogRead(A5);
   if(statusA5<300){
+    int nextProgram = 0;
     if(statusA5<150)//left button
-      serialControl((uint8_t)(latestProgram+6)%7+48);
+      nextProgram = (latestProgram+4)%6+1;
     else if(statusA5<220)//right button
-      serialControl((uint8_t)(latestProgram+1)%7+48);
+      nextProgram = (latestProgram)%6+1;
     else //middle button
-      ;    
+      ;
+    serialControl(nextProgram+48);
     if(turnOn)
     {
       led.engineControl(turnOn, LOAD); //set selected engines to load mode
@@ -331,10 +333,8 @@ void serialControl(uint8_t serialData)
       led.setCurrent(1);
       led.resetCode(); //reset opcode
     }
-  if(serialData == '0'){
+  if(serialData == '0')
     testLeds();
-    latestProgram = 0;
-  }
   else if(serialData == '1'){
     opcodeHeartBeat();
     latestProgram = 1;
