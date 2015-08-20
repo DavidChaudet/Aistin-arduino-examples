@@ -16,7 +16,7 @@ In this readme
 	*	If you don’t have Arduino IDE installed or have an older version install newer version from 
 		https://www.arduino.cc/en/Main/Software
 3.	Check location of your Arduino Sketchbook-directory.
-	*	On Arduino IDE open File-menu and open Preferences.
+	*	On Arduino IDE open File-menu and open Preferences.  
   		<img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/img/file-menu.png "/>
 	*	Write down location of your Sketchbook and exit Arduino IDE.  
 		<img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/img/sketchbook-location.png "/>
