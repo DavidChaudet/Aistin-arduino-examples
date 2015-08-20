@@ -12,15 +12,15 @@ In this readme
 1.	Detach Aistin CPU 2 from your PC.
 2.	Check you have Arduino IDE version 1.5.0 or newer. 
 	*	Launch Arduino IDE and check your version from title bar (Version 1.6.5 in figure).  
-		<img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/arduino-version.png ">
+		<img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/img/arduino-version.png "/>
 	*	If you don’t have Arduino IDE installed or have an older version install newer version from 
 		https://www.arduino.cc/en/Main/Software
 3.	Check location of your Arduino Sketchbook-directory.
 	*	On Arduino IDE open File-menu and open Preferences.
-  		<img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/file-menu.png ">
+  		<img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/img/file-menu.png "/>
 	*	Write down location of your Sketchbook and exit Arduino IDE.  
-		<img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/sketchbook-location.png ">
-4.	Download repository with <img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/download-button.png ">-button on the right.
+		<img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/img/sketchbook-location.png "/>
+4.	Download repository with <img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/img/download-button.png "/>-button on the right.
 5.	Open the Zip-file and open Aistin-arduino-examples-master-folder inside.
 6.	Extract the package to Arduino Sketchbook-folder.
 7.	Go to Arduino Sketchbook folder and copy the hardware folder.
@@ -36,12 +36,12 @@ This will not overwrite but merge the Arduino’s hardware-folder with Aistin ha
 14.	Launch Arduino IDE.
 15.	On Arduino IDE open Tools-menu and from both Board- and Port-submenu select Aistin CPU 2. 
 16.	Next open File-menu and from Sketchbook-submenu select example code to try out.
-17.	Press Upload-button <img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/upload-button.png "> to upload code into Aistin CPU 2. 
+17.	Press Upload-button <img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/img/upload-button.png "/> to upload code into Aistin CPU 2. 
 
 ## Attaching the boards
 Connect the addon boards to CPU board by connecting the female and male [Aistin BUS24](https://iprotoxi.fi/index.php/aistin-bus24) connectors. Push gently on the Aistin BUS24 connectors pointed by the blue arrows on the first figure. Make sure the addon boards are aligned with the CPU board like in the first figure. DO NOT connect the addon boards as in the crossed figure.  
-<img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/Addonboards-correct.png ">  
-<img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/Addonboards-incorrect.png ">  
+<img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/img/Addonboards-correct.png "/>  
+<img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/img/Addonboards-incorrect.png "/>  
 
 ##	FAQ  
 ###	Where is my Arduino Sketchbook folder?  
