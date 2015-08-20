@@ -3,9 +3,9 @@
 These are Arduino examples for iProtoXi Aistin family. [Arduino IDE](https://www.arduino.cc/en/Main/Software) (1.5.0-) required. For Arduino Classic IDE support see FAQ [I want to use Arduino Classic IDE](#I-want-to-use-Arduino-Classic-IDE).  
 
 In this readme
-* [Support for Arduino IDE](#Support-for-Arduino-IDE)
-* [Attaching the boards](#Attaching-the-boards)
-* [FAQ](#FAQ)
+* [Support for Arduino IDE](#support-for-Arduino-IDE)
+* [Attaching the boards](#attaching-the-boards)
+* [FAQ](#faq)
 
 
 ##	Support for Arduino IDE
