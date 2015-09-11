@@ -1,6 +1,6 @@
 # Aistin Arduino examples  
 <img src="https://raw.github.com/iProtoXi/Aistin-arduino-examples/master/Aistin-CPU2.png" align="right" />
-These are Arduino examples for iProtoXi Aistin family. [Arduino IDE](https://www.arduino.cc/en/Main/Software) (1.5.0-) required. For Arduino Classic IDE support see FAQ [I want to use Arduino Classic IDE](#I-want-to-use-Arduino-Classic-IDE).  
+These are Arduino examples for iProtoXi Aistin family. [Arduino IDE](https://www.arduino.cc/en/Main/Software) (1.5.0-) required. For Arduino Classic IDE support see FAQ [I want to use Arduino Classic IDE](#i-want-to-use-arduino-classic-ide).  
 
 In this readme
 * [Support for Arduino IDE](#support-for-arduino-ide)
