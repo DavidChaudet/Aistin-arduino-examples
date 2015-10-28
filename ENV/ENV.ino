@@ -27,16 +27,17 @@ void setup(){
   UVS.init();
   baro.init();
   HTS.init();
+  HTS.readCalibration();
   LPS.init();
   delay(100);
 }
 void loop(){
   while(!Serial);
   Serial.println("Serial open");
+  humidityAndTemperature();
   lightAndProximity();
   uv();
   pressure();
-  humidityAndTemperature();
 }
 void uv(void)
 {
@@ -72,7 +73,7 @@ void pressure(void)
 }
 void humidityAndTemperature(void)
 {
-  int16_t humi, temp;
+  float humi, temp;
   while(true)
   {
     delay(100);

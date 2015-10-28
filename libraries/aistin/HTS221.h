@@ -30,11 +30,17 @@
 #define HTS221_h
 
 class HTS221 {
+private:
+	float RHf, RHc;
+	float CTf, CTc;
 public:
 	static uint8_t sensorAddress;
 	uint8_t init(void);
-	int16_t readHumidity(void);
-	uint16_t readTemperature(void);
+	void readCalibration(void);
+	int16_t readHumidityRaw(void);
+	float readHumidity(void);
+	uint16_t readTemperatureRaw(void);
+	float readTemperature(void);
 	uint8_t readReg(uint8_t);
 	void readReg(uint8_t, uint8_t *, uint8_t);
 	uint8_t writeReg(uint8_t, uint8_t);
