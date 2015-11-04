@@ -94,9 +94,6 @@ uint16_t HTS221::readTemperatureRaw(void)
 float HTS221::readTemperature(void)
 {
 	int16_t raw = readTemperatureRaw();
-	Serial.println(raw);
-	Serial.println(CTf,5);
-	Serial.println(CTc,5);
 	return (CTf * raw) + CTc;
 }
 uint8_t HTS221::readReg(uint8_t regAddress)
