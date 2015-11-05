@@ -35,14 +35,14 @@ uint8_t HTS221::init(void)
 }
 void HTS221::readCalibration(void)
 {
-	int16_t C0; //= ((parseInt(data.substr(10,2), 16) & 3)<<8) | parseInt(data.substr(4,2), 16);
-    int16_t C1; //= (((parseInt(data.substr(10,2), 16)>>2)&3)<<8) | parseInt(data.substr(6,2), 16);
-    int16_t T0; //= twoCompliment(parseInt(data.substr(26,2)+data.substr(24,2), 16),16);
-    int16_t T1; //= twoCompliment(parseInt(data.substr(30,2)+data.substr(28,2), 16),16);
-    int16_t RH0;//= parseInt(data.substr(0,2), 16);
-    int16_t RH1;//= parseInt(data.substr(2,2), 16);
-    int16_t H0; //= twoCompliment(parseInt(data.substr(14,2)+data.substr(12,2),16),16);
-    int16_t H1; //= twoCompliment(parseInt(data.substr(22,2)+data.substr(20,2),16),16);
+	int16_t C0; 
+    int16_t C1; 
+    int16_t T0; 
+    int16_t T1; 
+    int16_t RH0;
+    int16_t RH1;
+    int16_t H0; 
+    int16_t H1; 
 	
 	uint8_t calibrationRegs[16];
 	readReg(0xB0, calibrationRegs, 16);
@@ -55,25 +55,11 @@ void HTS221::readCalibration(void)
     H0  = ((((uint16_t)calibrationRegs[7])<<8) | ((uint16_t)calibrationRegs[6])); // e.g. 4085
     H1  = ((((uint16_t)calibrationRegs[11])<<8) | ((uint16_t)calibrationRegs[10])); // e.g. 203.5
 	
-    // CTf = (float)((C1 - C0) / (T1 - T0) / 8);
-    // CTc = (float)(-CTf * T0 + C0 / 8);
-    // RHf = (float)((RH1 - RH0) / (H1 - H0) / 2);
-    // RHc = (float)(-RHf * H0 + RH0 / 2);
-    CTf = ((float)C1 - (float)C0) / ((float)T1 - (float)T0) / 8.;
-    CTc = ((-(float)CTf * (float)T0) + (float)C0 )/ 8.;
-    RHf = ((float)RH1 - (float)RH0) / ((float)H1 - (float)H0) / 2.;
-    RHc = ((-(float)RHf * (float)H0) + (float)RH0 )/ 2.;
+    CTf = ((float)C1 - (float)C0) / ((float)T1 - (float)T0) / 8.0;
+    CTc = ((-1*(float)CTf * (float)T0) + (float)C0 )/ 8.0;
+    RHf = ((float)RH1 - (float)RH0) / ((float)H1 - (float)H0) / 2.0;
+    RHc = ((-1*(float)RHf * (float)H0) + (float)RH0 )/ 2.0;
 }
-/*
-function humidityTemperatureParsing(data){
-	var sensorValue = twoCompliment(parseInt(data.substr(2,2)+data.substr(0,2), 16),16);
-	return ((C1-C0)/(T1-T0)*sensorValue-(C1-C0)/(T1-T0)*T0+C0)/8;
-}
-function humidityParsing(data){
-	var sensorValue = twoCompliment(parseInt(data.substr(2,2)+data.substr(0,2), 16),16);
-	return (((RH1-RH0)/(H1-H0))*sensorValue-(RH1-RH0)/(H1-H0)*H0+RH0)/2;
-}
-*/
 int16_t HTS221::readHumidityRaw(void)
 {
 	uint8_t sensorData[2];

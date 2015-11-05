@@ -21,15 +21,20 @@ HTS221 HTS; //Humidity & temperature sensor
 TCS37725FN LPS; //Light & proximity sensor
 
 void setup(){
+  pinMode(4, OUTPUT);
   digitalWrite(4, HIGH); //Sensor enable
+  pinMode(13 ,OUTPUT);
+  analogWrite(13, 100); //power led on
+  //digitalWrite(13,HIGH);
   Wire.begin();
   Serial.begin(9600);
   UVS.init();
   baro.init();
   HTS.init();
-  HTS.readCalibration();
   LPS.init();
   delay(100);
+  HTS.readCalibration();
+  
 }
 void loop(){
   while(!Serial);
